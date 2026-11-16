@@ -13,12 +13,12 @@
   <img src="https://img.shields.io/badge/Tailwind_CSS-4.2.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS"/>
   <img src="https://img.shields.io/badge/Framer_Motion-12.38.0-0055FF?style=for-the-badge&logo=framer&logoColor=white" alt="Framer Motion"/>
   <img src="https://img.shields.io/badge/Supabase-2.106.2-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase"/>
-  <a href="https://github.com/lalithdev/Lalith-Aditya-Singuparapu-s-Portfolio/stargazers"><img src="https://img.shields.io/github/stars/lalithdev/Lalith-Aditya-Singuparapu-s-Portfolio?style=for-the-badge&logo=github&color=yellow" alt="GitHub Stars"/></a>
+  <a href="https://github.com/lalithadityas/lalith-portfolio/stargazers"><img src="https://img.shields.io/github/stars/lalithadityas/lalith-portfolio?style=for-the-badge&logo=github&color=yellow" alt="GitHub Stars"/></a>
 </p>
 
 <p>
   <a href="https://meetlalith.vercel.app" target="_blank"><strong>🌐 Live Demo</strong></a> ·
-  <a href="https://github.com/lalithdev/Lalith-Aditya-Singuparapu-s-Portfolio" target="_blank">⚙️ GitHub Repo</a>
+  <a href="https://github.com/lalithadityas/lalith-portfolio" target="_blank">⚙️ GitHub Repo</a>
 </p>
 
 <p>
@@ -91,7 +91,7 @@ The portfolio operates as a Single Page Application (SPA) structured modularly b
 ## 📁 Project Structure
 
 ```text
-Lalith-Aditya-Singuparapu-s-Portfolio/
+lalith-portfolio/
 │
 ├── .env                       # Supabase environment variables (Not committed)
 ├── .gitignore                 # Git ignore rules
@@ -198,8 +198,8 @@ Follow these steps to run the portfolio locally.
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/lalithdev/Lalith-Aditya-Singuparapu-s-Portfolio.git
-cd Lalith-Aditya-Singuparapu-s-Portfolio
+git clone https://github.com/lalithadityas/lalith-portfolio.git
+cd lalith-portfolio
 ```
 
 ### Step 2: Install Dependencies
@@ -248,7 +248,7 @@ Visit `http://localhost:5173` in your browser.
 
 | | |
 |:---:|:---|
-| <img src="https://avatars.githubusercontent.com/lalithdev" width="80" style="border-radius:50%"/> | **Lalith Aditya S** *(LalithDev)*<br/>Full-Stack Developer · Designer · Builder<br/>📍 India |
+| <img src="https://avatars.githubusercontent.com/lalithadityas" width="80" style="border-radius:50%"/> | **Lalith Aditya S** *(LalithDev)*<br/>Full-Stack Developer · Designer · Builder<br/>📍 India |
 
 </div>
 
@@ -256,7 +256,7 @@ Visit `http://localhost:5173` in your browser.
 |---|---|
 | 🌐 **Portfolio** | [meetlalith.vercel.app](https://meetlalith.vercel.app) |
 | 💼 **LinkedIn** | [linkedin.com/in/lalith-aditya-singuparapu](https://www.linkedin.com/in/lalith-aditya-singuparapu) |
-| 🐙 **GitHub** | [github.com/lalithdev](https://github.com/lalithdev) |
+| 🐙 **GitHub** | [github.com/lalithadityas](https://github.com/lalithadityas) |
 | 📧 **Email** | [lalithadityasinguparapu@gmail.com](mailto:lalithadityasinguparapu@gmail.com) |
 
 ---
@@ -294,7 +294,7 @@ SOFTWARE.
 <div align="center">
   <p>Built with ❤️ by <a href="https://meetlalith.vercel.app" target="_blank"><strong>Lalith Aditya S</strong></a></p>
   <p>
-    <a href="https://github.com/lalithdev/Lalith-Aditya-Singuparapu-s-Portfolio" target="_blank">📦 GitHub Repository</a> ·
+    <a href="https://github.com/lalithadityas/lalith-portfolio" target="_blank">📦 GitHub Repository</a> ·
     <a href="https://www.linkedin.com/in/lalith-aditya-singuparapu" target="_blank">💼 LinkedIn</a> ·
     <a href="https://meetlalith.vercel.app" target="_blank">🌐 Portfolio</a>
   </p>

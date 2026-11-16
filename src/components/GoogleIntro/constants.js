@@ -1,5 +1,6 @@
 // ─── constants.js ────────────────────────────────────────────────────────────
 // Static data for the ultra-authentic Google search intro experience.
+import { personalData } from '../../data/personal';
 
 export const INTRO_STAGES = {
   HOME: 0,
@@ -16,7 +17,7 @@ export const INTRO_STAGES = {
   COMPLETE: 11,
 };
 
-export const SEARCH_QUERY = 'Lalith Aditya';
+export const SEARCH_QUERY = personalData.displayName;
 
 /** Developer search history shown on clicking the empty search bar */
 export const DEVELOPER_HISTORY_SUGGESTIONS = [
@@ -228,12 +229,12 @@ export function getDynamicSuggestions(query) {
 
 /** Google Search Result #1 (Portfolio) with authentic sitelinks */
 export const PRIMARY_RESULT = {
-  urlDisplay: 'https://lalithaditya.dev',
-  pathDisplay: 'https://lalithaditya.dev › portfolio',
-  siteTitle: 'Lalith Aditya',
-  title: 'Lalith Aditya – Software Engineer | Full Stack & AI Developer',
+  urlDisplay: personalData.liveUrl,
+  pathDisplay: `${personalData.liveUrl.replace('https://', '')} › portfolio`,
+  siteTitle: personalData.displayName,
+  title: `${personalData.displayName} – ${personalData.role} | Official Portfolio`,
   description:
-    'Official portfolio of Lalith Aditya Singuparapu. Computer Science undergraduate at KL University specializing in high-performance web systems, React, Spring Boot, and AI architectures.',
+    `Official portfolio of ${personalData.name}. Computer Science undergraduate at KL University specializing in high-performance web systems, React, Spring Boot, and AI architectures.`,
   sitelinks: [
     {
       title: 'Featured Projects',
@@ -247,7 +248,7 @@ export const PRIMARY_RESULT = {
     },
     {
       title: 'Skills & Tech Stack',
-      snippet: 'React, Next.js, Java, Spring Boot, PostgreSQL, Python, and cloud tools.',
+      snippet: 'React, Java, Spring Boot, PostgreSQL, Python, and cloud tools.',
       tag: 'Skills',
     },
     {
@@ -260,29 +261,42 @@ export const PRIMARY_RESULT = {
 
 /** Secondary Search Result for realism */
 export const SECONDARY_RESULT = {
-  urlDisplay: 'https://github.com › lalithdev',
+  urlDisplay: personalData.github.replace('https://', ''),
   siteTitle: 'GitHub',
-  title: 'lalithdev (Lalith Aditya) · GitHub',
+  title: `${personalData.github.split('/').pop()} (${personalData.displayName}) · GitHub`,
   description:
     'Software engineer and open source contributor. Check out repositories for full-stack architectures, API services, and ML experiments.',
 };
 
 /** Knowledge Panel data (matches Google's official desktop knowledge graph) */
 export const KNOWLEDGE_PANEL_DATA = {
-  name: 'Lalith Aditya Singuparapu',
-  title: 'Software Engineer',
+  name: personalData.name,
+  title: personalData.role,
   subtitle: 'Full-stack developer & AI systems enthusiast',
   about:
-    'Lalith Aditya Singuparapu is an Indian software engineer and Computer Science undergraduate at KL University, known for building robust full-stack applications and intelligent developer tooling.',
+    `${personalData.name} is an Indian software engineer and Computer Science undergraduate at KL University, known for building robust full-stack applications and intelligent developer tooling.`,
   facts: [
     { label: 'Education', value: 'KL University (B.Tech CSE, 2024–2028)' },
     { label: 'Primary Focus', value: 'Backend Engineering, Distributed Systems, AI' },
-    { label: 'Languages', value: 'Java, Python, TypeScript, SQL' },
-    { label: 'Location', value: 'India' },
+    { label: 'Languages', value: 'Java, Python, C, JavaScript, SQL' },
+    { label: 'Location', value: personalData.country },
   ],
   profiles: [
-    { name: 'GitHub', handle: '@lalithdev' },
-    { name: 'LinkedIn', handle: 'lalith-aditya-singuparapu' },
+    { name: 'GitHub', handle: `@${personalData.github.split('/').pop()}` },
+    { name: 'LinkedIn', handle: personalData.linkedin.split('/').filter(Boolean).pop() },
+  ],
+};
+
+export const KNOWLEDGE_PANEL = {
+  initials: `${personalData.brandName.first[0]}${personalData.brandName.last[0]}`,
+  name: personalData.name,
+  title: personalData.role,
+  subtitle: 'Full-stack developer & AI systems enthusiast',
+  university: 'KL University (B.Tech CSE, 2024–2028)',
+  skills: ['Java', 'Spring Boot', 'React', 'PostgreSQL', 'Microservices', 'REST APIs'],
+  links: [
+    { label: 'GitHub', color: '#8ab4f8' },
+    { label: 'LinkedIn', color: '#81c995' },
   ],
 };
 
