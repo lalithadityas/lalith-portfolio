@@ -5,6 +5,28 @@ import { FiX } from 'react-icons/fi';
 import Magnetic from '../common/Magnetic';
 import IosEmoji from '../common/IosEmoji';
 
+function getAvatarUrl(name, image) {
+  if (image && !image.includes('pravatar')) {
+    return image;
+  }
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(name || 'User')}&background=random&size=256`;
+}
+
+function TestimonialAvatar({ name, image }) {
+  const avatarUrl = getAvatarUrl(name, image);
+
+  return (
+    <div className="w-10 h-10 rounded-full overflow-hidden bg-white/10 shrink-0">
+      <img
+        src={avatarUrl}
+        alt={name}
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+    </div>
+  );
+}
+
 export default function Testimonials() {
   const [testimonials, setTestimonials] = useState([]);
   const sectionRef = useRef(null);
@@ -28,6 +50,8 @@ export default function Testimonials() {
     }
 
     try {
+      const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(formData.name.trim())}&background=random&size=256`;
+
       const { error } = await supabase
         .from('testimonials')
         .insert([
@@ -36,6 +60,7 @@ export default function Testimonials() {
             role: formData.role,
             rating: formData.rating,
             message: formData.message,
+            image: avatarUrl,
             approved: true,
           },
         ]);
@@ -494,16 +519,7 @@ w-full
 
               <div className="flex items-center justify-start gap-3 mt-auto pt-3 border-t border-white/10">
 
-                <div className="w-10 h-10 rounded-full overflow-hidden bg-white/10 shrink-0">
-                  <img
-                    src={
-                      testimonial.image ||
-                      'https://i.pravatar.cc/150?img=3'
-                    }
-                    alt={testimonial.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <TestimonialAvatar name={testimonial.name} image={testimonial.image} />
 
                 <div className="flex flex-col items-start">
                   <span className="text-white font-bold text-xs tracking-wider uppercase">
@@ -590,16 +606,7 @@ w-full
 
               <div className="flex items-center justify-start gap-3 mt-auto pt-3 border-t border-white/10">
 
-                <div className="w-10 h-10 rounded-full overflow-hidden bg-white/10 shrink-0">
-                  <img
-                    src={
-                      testimonial.image ||
-                      'https://i.pravatar.cc/150?img=3'
-                    }
-                    alt={testimonial.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <TestimonialAvatar name={testimonial.name} image={testimonial.image} />
 
                 <div className="flex flex-col items-start">
                   <span className="text-white font-bold text-xs tracking-wider uppercase">

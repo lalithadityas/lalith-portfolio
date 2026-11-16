@@ -2,6 +2,7 @@ import React from 'react';
 import lensImagePng from '../../assets/images/GoogleIntro/lensimage-removedbg.png';
 import { motion, AnimatePresence } from 'framer-motion';
 import { INTRO_STAGES } from './constants';
+import { personalData } from '../../data/personal';
 import {
   resultsPageVariants,
   headerBarVariants,
@@ -511,7 +512,7 @@ const SearchResults = ({ stage, visible, onResultRef }) => {
                 >
                   {/* Card 1: LinkedIn Entity Card */}
                   <a
-                    href="https://www.linkedin.com/in/lalith-aditya-singuparapu/"
+                    href={personalData.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block rounded-[8px] border border-[#3c4043] bg-[#202124] hover:bg-[#282a2d] hover:border-[#5f6368] p-3 transition-colors cursor-pointer"
@@ -529,7 +530,7 @@ const SearchResults = ({ stage, visible, onResultRef }) => {
                       className="text-[14px] font-medium text-[#8ab4f8] hover:underline leading-snug mb-1"
                       style={{ fontFamily: "'Google Sans Text', Roboto, sans-serif" }}
                     >
-                      Lalith Aditya Singuparapu
+                      {personalData.name}
                     </h4>
                     {/* Snippet */}
                     <p className="text-[12px] leading-[1.4] text-[#9aa0a6]">
@@ -539,7 +540,7 @@ const SearchResults = ({ stage, visible, onResultRef }) => {
 
                   {/* Card 2: GitHub Entity Card */}
                   <a
-                    href="https://github.com/lalithdev"
+                    href={personalData.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block rounded-[8px] border border-[#3c4043] bg-[#202124] hover:bg-[#282a2d] hover:border-[#5f6368] p-3 transition-colors cursor-pointer"
@@ -557,7 +558,7 @@ const SearchResults = ({ stage, visible, onResultRef }) => {
                       className="text-[14px] font-medium text-[#8ab4f8] hover:underline leading-snug mb-1"
                       style={{ fontFamily: "'Google Sans Text', Roboto, sans-serif" }}
                     >
-                      lalithdev
+                      {personalData.github.split('/').pop()}
                     </h4>
                     {/* Snippet */}
                     <p className="text-[12px] leading-[1.4] text-[#9aa0a6]">
@@ -588,10 +589,10 @@ const SearchResults = ({ stage, visible, onResultRef }) => {
                   <PortfolioFavicon size={26} imgSize={18} />
                   <div className="flex flex-col min-w-0 flex-1">
                     <span className="text-[14px] text-[#dadce0] font-normal leading-tight">
-                      meetlalith.vercel.app
+                      {personalData.liveUrl.replace('https://', '')}
                     </span>
                     <span className="text-[12px] text-[#bdc1c6] truncate leading-tight">
-                      https://meetlalith.vercel.app/
+                      {personalData.liveUrl}
                     </span>
                   </div>
                   <DotsMenuIcon />
@@ -608,7 +609,7 @@ const SearchResults = ({ stage, visible, onResultRef }) => {
                   className="text-[20px] font-normal leading-[1.3] cursor-pointer my-1.5 inline-block"
                   style={{ color: titleColor }}
                 >
-                  Lalith Aditya — CSE Undergraduate | Portfolio
+                  {personalData.displayName} — {personalData.role} | Portfolio
                 </motion.h2>
 
                 {/* Result Snippet */}
@@ -631,7 +632,7 @@ const SearchResults = ({ stage, visible, onResultRef }) => {
                       linkedin.com
                     </span>
                     <span className="text-[12px] text-[#bdc1c6] truncate leading-tight">
-                      https://www.linkedin.com/in/lalith-aditya-singuparapu/
+                      {personalData.linkedin}
                     </span>
                   </div>
                   <DotsMenuIcon />
@@ -639,7 +640,7 @@ const SearchResults = ({ stage, visible, onResultRef }) => {
 
                 {/* Result Title */}
                 <h3 className="text-[20px] font-normal leading-[1.3] text-[#8ab4f8] hover:underline cursor-pointer my-1.5">
-                  Lalith Aditya Singuparapu — CSE Undergraduate at KL University
+                  {personalData.name} — CSE Undergraduate at KL University
                 </h3>
 
                 {/* Result Snippet */}

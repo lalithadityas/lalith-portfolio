@@ -8,7 +8,7 @@ import {
   FiFile, FiEye, FiDownload, FiX, FiMinus, FiPlus
 } from 'react-icons/fi';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
-import resumePdf from '../../assets/resume/Lalith_Universal_Resume_Template_06_08_2026.pdf';
+// Resume path is managed in src/data/about.js → aboutData.resumePath
 
 /* ─────────────────────────────────────────
    RESUME POPUP  (image-2 style card)
@@ -159,7 +159,7 @@ const ResumePopup = ({ onView, layoutId }) => (
 
       {/* Download */}
       <a
-        href={resumePdf}
+        href={aboutData.resumePath}
         download="Resume.pdf"
         title="Download PDF"
         style={{
@@ -338,7 +338,7 @@ const ResumeViewer = ({ isOpen, onClose }) => {
               {/* Right: download btn */}
               <div style={{ position: 'absolute', right: 18, display: 'flex', alignItems: 'center' }}>
                 <a
-                  href={resumePdf}
+                  href={aboutData.resumePath}
                   download="Resume.pdf"
                   title="Download"
                   style={{
@@ -374,7 +374,7 @@ const ResumeViewer = ({ isOpen, onClose }) => {
             {/* ── PDF viewer — edge-to-edge ── */}
             <div style={{ flex: 1, minHeight: 0, background: 'transparent', overflow: 'hidden' }}>
               <iframe
-                src={`${resumePdf}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+                src={`${aboutData.resumePath}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
                 title="Lalith Aditya Resume"
                 style={{ width: 'calc(100% + 18px)', height: '100%', border: 'none', display: 'block' }}
               />
