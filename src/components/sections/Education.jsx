@@ -8,28 +8,18 @@ const EXPO = [0.16, 1, 0.3, 1];
 export default function Education() {
   const containerRef = useRef(null);
 
-  // Strict Chronological order: 10th (2021-2022) -> 12th/Intermediate (2022-2024) -> BTech (2024-2028)
-  const tenthData = educationTimeline.find(item => item.period.includes('2021') || item.degree.toLowerCase().includes('10th') || item.degree.toLowerCase().includes('secondary')) || educationTimeline[0];
-  const interData = educationTimeline.find(item => item.period.includes('2022') || item.degree.toLowerCase().includes('intermediate')) || educationTimeline[1];
-  const btechData = educationTimeline.find(item => item.period.includes('2024') || item.degree.toLowerCase().includes('bachelor') || item.degree.toLowerCase().includes('b.tech')) || educationTimeline[2];
-
-  const orderedTimeline = [
-    {
-      color: '#06b6d4',
-      bgGlow: 'rgba(6, 182, 212, 0.25)',
-      data: tenthData
-    },
-    {
-      color: '#ec4899',
-      bgGlow: 'rgba(236, 72, 153, 0.25)',
-      data: interData
-    },
-    {
-      color: '#f59e0b',
-      bgGlow: 'rgba(245, 158, 11, 0.25)',
-      data: btechData
-    }
+  // Presentation theme styling for timeline points (Cyan -> Pink -> Amber)
+  const timelineThemes = [
+    { color: '#06b6d4', bgGlow: 'rgba(6, 182, 212, 0.25)' },
+    { color: '#ec4899', bgGlow: 'rgba(236, 72, 153, 0.25)' },
+    { color: '#f59e0b', bgGlow: 'rgba(245, 158, 11, 0.25)' },
   ];
+
+  // Directly consume ordered academic data from src/data/education.js
+  const orderedTimeline = educationTimeline.map((item, index) => ({
+    ...timelineThemes[index % timelineThemes.length],
+    data: item,
+  }));
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -98,196 +88,146 @@ export default function Education() {
 
           {/* Timeline Items List */}
           <div className="space-y-24 md:space-y-36 relative z-10">
-            
-            {/* ── ITEM 01: 10TH GRADE (RIGHT SIDE) ── */}
-            <div className="relative flex flex-col md:flex-row items-center">
-              
-              {/* Left Empty Space */}
-              <div className="w-full md:w-1/2 pr-0 md:pr-16 hidden md:block" />
+            {orderedTimeline.map((item, idx) => {
+              const isRight = idx % 2 === 0;
 
-              {/* Central Node Marker */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center">
+              return (
                 <div
-                  className="w-10 h-10 rounded-full bg-[#020408] border-2 flex items-center justify-center transition-all duration-500"
-                  style={{
-                    borderColor: orderedTimeline[0].color,
-                    boxShadow: `0 0 25px ${orderedTimeline[0].bgGlow}`
-                  }}
+                  key={item.data.degree || idx}
+                  className="relative flex flex-col md:flex-row items-center"
                 >
-                  <div
-                    className="w-4 h-4 rounded-full animate-pulse"
-                    style={{ backgroundColor: orderedTimeline[0].color }}
-                  />
-                </div>
-              </div>
+                  {/* Left Empty Space (When card is on right) */}
+                  {isRight && (
+                    <div className="w-full md:w-1/2 pr-0 md:pr-16 hidden md:block" />
+                  )}
 
-              {/* Right Side Content Card */}
-              <div className="w-full md:w-1/2 pl-0 md:pl-16 relative">
-                
-                {/* Horizontal Stem Line Connecting Node to Card */}
-                <div
-                  className="hidden md:block absolute top-1/2 left-0 -translate-y-1/2 h-[2px] w-16"
-                  style={{ backgroundColor: orderedTimeline[0].color }}
-                />
+                  {/* Left Side Content Card (When card is on left) */}
+                  {!isRight && (
+                    <div className="w-full md:w-1/2 pr-0 md:pr-16 text-left relative">
+                      <div
+                        className="hidden md:block absolute top-1/2 right-0 -translate-y-1/2 h-[2px] w-16"
+                        style={{ backgroundColor: item.color }}
+                      />
 
-                <motion.div
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.8, ease: EXPO }}
-                  className="relative p-6 sm:p-8 rounded-3xl bg-[#080d1a]/95 border border-white/15 backdrop-blur-2xl shadow-2xl group hover:border-[#06b6d4]/60 transition-all duration-500"
-                >
-                  <div className="flex items-center gap-2 mb-3 font-mono text-xs font-bold text-[#06b6d4]">
-                    <FiCalendar className="w-4 h-4 text-[#06b6d4]" />
-                    <span>{orderedTimeline[0].data.period}</span>
+                      <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.8, ease: EXPO }}
+                        className="relative p-6 sm:p-8 rounded-3xl bg-[#080d1a]/95 border border-white/15 backdrop-blur-2xl shadow-2xl group transition-all duration-500"
+                        style={{
+                          borderColor: 'rgba(255, 255, 255, 0.15)',
+                        }}
+                        whileHover={{
+                          borderColor: `${item.color}99`,
+                        }}
+                      >
+                        <div
+                          className="flex items-center gap-2 mb-3 font-mono text-xs font-bold"
+                          style={{ color: item.color }}
+                        >
+                          <FiCalendar className="w-4 h-4" style={{ color: item.color }} />
+                          <span>{item.data.period}</span>
+                        </div>
+
+                        <h3 className="font-display font-black text-2xl sm:text-3xl text-white mb-2 leading-tight">
+                          {item.data.degree}
+                        </h3>
+
+                        <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#94a3b8] font-semibold mb-6">
+                          {item.data.institution}
+                        </p>
+
+                        <ul className="space-y-2.5 pt-4 border-t border-white/10">
+                          {item.data.achievements?.map((ach, i) => (
+                            <li key={i} className="flex items-center gap-3 text-sm text-[#cbd5e1]">
+                              <FiCheckCircle
+                                className="w-4 h-4 shrink-0"
+                                style={{ color: item.color }}
+                              />
+                              <span className="font-medium">{ach}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    </div>
+                  )}
+
+                  {/* Central Node Marker */}
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center">
+                    <div
+                      className="w-10 h-10 rounded-full bg-[#020408] border-2 flex items-center justify-center transition-all duration-500"
+                      style={{
+                        borderColor: item.color,
+                        boxShadow: `0 0 25px ${item.bgGlow}`,
+                      }}
+                    >
+                      <div
+                        className="w-4 h-4 rounded-full animate-pulse"
+                        style={{ backgroundColor: item.color }}
+                      />
+                    </div>
                   </div>
 
-                  <h3 className="font-display font-black text-2xl sm:text-3xl text-white mb-2 leading-tight">
-                    {orderedTimeline[0].data.degree}
-                  </h3>
-                  
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#94a3b8] font-semibold mb-6">
-                    {orderedTimeline[0].data.institution}
-                  </p>
+                  {/* Right Side Content Card (When card is on right) */}
+                  {isRight && (
+                    <div className="w-full md:w-1/2 pl-0 md:pl-16 relative">
+                      <div
+                        className="hidden md:block absolute top-1/2 left-0 -translate-y-1/2 h-[2px] w-16"
+                        style={{ backgroundColor: item.color }}
+                      />
 
-                  <ul className="space-y-2.5 pt-4 border-t border-white/10">
-                    {orderedTimeline[0].data.achievements?.map((ach, i) => (
-                      <li key={i} className="flex items-center gap-3 text-sm text-[#cbd5e1]">
-                        <FiCheckCircle className="w-4 h-4 shrink-0 text-[#06b6d4]" />
-                        <span className="font-medium">{ach}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </div>
-            </div>
+                      <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.8, ease: EXPO }}
+                        className="relative p-6 sm:p-8 rounded-3xl bg-[#080d1a]/95 border border-white/15 backdrop-blur-2xl shadow-2xl group transition-all duration-500"
+                        style={{
+                          borderColor: 'rgba(255, 255, 255, 0.15)',
+                        }}
+                        whileHover={{
+                          borderColor: `${item.color}99`,
+                        }}
+                      >
+                        <div
+                          className="flex items-center gap-2 mb-3 font-mono text-xs font-bold"
+                          style={{ color: item.color }}
+                        >
+                          <FiCalendar className="w-4 h-4" style={{ color: item.color }} />
+                          <span>{item.data.period}</span>
+                        </div>
 
-            {/* ── ITEM 02: INTERMEDIATE / 12TH (LEFT SIDE) ── */}
-            <div className="relative flex flex-col md:flex-row items-center">
-              
-              {/* Left Side Content Card */}
-              <div className="w-full md:w-1/2 pr-0 md:pr-16 text-left relative">
-                
-                {/* Horizontal Stem Line Connecting Card to Node */}
-                <div
-                  className="hidden md:block absolute top-1/2 right-0 -translate-y-1/2 h-[2px] w-16"
-                  style={{ backgroundColor: orderedTimeline[1].color }}
-                />
+                        <h3 className="font-display font-black text-2xl sm:text-3xl text-white mb-2 leading-tight">
+                          {item.data.degree}
+                        </h3>
 
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.8, ease: EXPO }}
-                  className="relative p-6 sm:p-8 rounded-3xl bg-[#080d1a]/95 border border-white/15 backdrop-blur-2xl shadow-2xl group hover:border-[#ec4899]/60 transition-all duration-500"
-                >
-                  <div className="flex items-center gap-2 mb-3 font-mono text-xs font-bold text-[#ec4899]">
-                    <FiCalendar className="w-4 h-4 text-[#ec4899]" />
-                    <span>{orderedTimeline[1].data.period}</span>
-                  </div>
+                        <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#94a3b8] font-semibold mb-6">
+                          {item.data.institution}
+                        </p>
 
-                  <h3 className="font-display font-black text-2xl sm:text-3xl text-white mb-2 leading-tight">
-                    {orderedTimeline[1].data.degree}
-                  </h3>
-                  
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#94a3b8] font-semibold mb-6">
-                    {orderedTimeline[1].data.institution}
-                  </p>
+                        <ul className="space-y-2.5 pt-4 border-t border-white/10">
+                          {item.data.achievements?.map((ach, i) => (
+                            <li key={i} className="flex items-center gap-3 text-sm text-[#cbd5e1]">
+                              <FiCheckCircle
+                                className="w-4 h-4 shrink-0"
+                                style={{ color: item.color }}
+                              />
+                              <span className="font-medium">{ach}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    </div>
+                  )}
 
-                  <ul className="space-y-2.5 pt-4 border-t border-white/10">
-                    {orderedTimeline[1].data.achievements?.map((ach, i) => (
-                      <li key={i} className="flex items-center gap-3 text-sm text-[#cbd5e1]">
-                        <FiCheckCircle className="w-4 h-4 shrink-0 text-[#ec4899]" />
-                        <span className="font-medium">{ach}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </div>
-
-              {/* Central Node Marker */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center">
-                <div
-                  className="w-10 h-10 rounded-full bg-[#020408] border-2 flex items-center justify-center transition-all duration-500"
-                  style={{
-                    borderColor: orderedTimeline[1].color,
-                    boxShadow: `0 0 25px ${orderedTimeline[1].bgGlow}`
-                  }}
-                >
-                  <div
-                    className="w-4 h-4 rounded-full animate-pulse"
-                    style={{ backgroundColor: orderedTimeline[1].color }}
-                  />
+                  {/* Right Empty Space (When card is on left) */}
+                  {!isRight && (
+                    <div className="w-full md:w-1/2 pl-0 md:pl-16 hidden md:block" />
+                  )}
                 </div>
-              </div>
-
-              {/* Right Empty Space */}
-              <div className="w-full md:w-1/2 pl-0 md:pl-16 hidden md:block" />
-            </div>
-
-            {/* ── ITEM 03: B.TECH (RIGHT SIDE) ── */}
-            <div className="relative flex flex-col md:flex-row items-center">
-              
-              {/* Left Empty Space */}
-              <div className="w-full md:w-1/2 pr-0 md:pr-16 hidden md:block" />
-
-              {/* Central Node Marker */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center">
-                <div
-                  className="w-10 h-10 rounded-full bg-[#020408] border-2 flex items-center justify-center transition-all duration-500"
-                  style={{
-                    borderColor: orderedTimeline[2].color,
-                    boxShadow: `0 0 25px ${orderedTimeline[2].bgGlow}`
-                  }}
-                >
-                  <div
-                    className="w-4 h-4 rounded-full animate-pulse"
-                    style={{ backgroundColor: orderedTimeline[2].color }}
-                  />
-                </div>
-              </div>
-
-              {/* Right Side Content Card */}
-              <div className="w-full md:w-1/2 pl-0 md:pl-16 relative">
-                
-                {/* Horizontal Stem Line Connecting Node to Card */}
-                <div
-                  className="hidden md:block absolute top-1/2 left-0 -translate-y-1/2 h-[2px] w-16"
-                  style={{ backgroundColor: orderedTimeline[2].color }}
-                />
-
-                <motion.div
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.8, ease: EXPO }}
-                  className="relative p-6 sm:p-8 rounded-3xl bg-[#080d1a]/95 border border-white/15 backdrop-blur-2xl shadow-2xl group hover:border-[#f59e0b]/60 transition-all duration-500"
-                >
-                  <div className="flex items-center gap-2 mb-3 font-mono text-xs font-bold text-[#f59e0b]">
-                    <FiCalendar className="w-4 h-4 text-[#f59e0b]" />
-                    <span>{orderedTimeline[2].data.period}</span>
-                  </div>
-
-                  <h3 className="font-display font-black text-2xl sm:text-3xl text-white mb-2 leading-tight">
-                    {orderedTimeline[2].data.degree}
-                  </h3>
-                  
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#94a3b8] font-semibold mb-6">
-                    {orderedTimeline[2].data.institution}
-                  </p>
-
-                  <ul className="space-y-2.5 pt-4 border-t border-white/10">
-                    {orderedTimeline[2].data.achievements?.map((ach, i) => (
-                      <li key={i} className="flex items-center gap-3 text-sm text-[#cbd5e1]">
-                        <FiCheckCircle className="w-4 h-4 shrink-0 text-[#f59e0b]" />
-                        <span className="font-medium">{ach}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </div>
-            </div>
-
+              );
+            })}
           </div>
 
         </div>
