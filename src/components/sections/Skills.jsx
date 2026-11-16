@@ -10,17 +10,22 @@ import {
   FiZap,
   FiBook,
   FiUsers,
+  FiServer,
 } from 'react-icons/fi';
 
 const CATEGORY_UI = {
   'Programming Languages': { icon: <FiCode className="w-4 h-4" />, accent: '#60a5fa' },
-  'Web Development': { icon: <FiLayout className="w-4 h-4" />, accent: '#818cf8' },
+  'Backend Development': { icon: <FiServer className="w-4 h-4" />, accent: '#818cf8' },
+  'Frontend Development': { icon: <FiLayout className="w-4 h-4" />, accent: '#f472b6' },
   'Databases': { icon: <FiDatabase className="w-4 h-4" />, accent: '#22d3ee' },
-  'Cloud Technologies': { icon: <FiCloud className="w-4 h-4" />, accent: '#a78bfa' },
+  'Cloud & DevOps': { icon: <FiCloud className="w-4 h-4" />, accent: '#a78bfa' },
   'Developer Tools': { icon: <FiGitBranch className="w-4 h-4" />, accent: '#34d399' },
-  'Development Practices': { icon: <FiZap className="w-4 h-4" />, accent: '#f472b6' },
   'Core Concepts': { icon: <FiBook className="w-4 h-4" />, accent: '#fb923c' },
   'Soft Skills': { icon: <FiUsers className="w-4 h-4" />, accent: '#38bdf8' },
+  // Backward compatibility aliases
+  'Web Development': { icon: <FiLayout className="w-4 h-4" />, accent: '#818cf8' },
+  'Cloud Technologies': { icon: <FiCloud className="w-4 h-4" />, accent: '#a78bfa' },
+  'Development Practices': { icon: <FiZap className="w-4 h-4" />, accent: '#f472b6' },
 };
 
 const EXPO = [0.16, 1, 0.3, 1];
