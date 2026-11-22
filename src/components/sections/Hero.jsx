@@ -126,7 +126,7 @@ export default function Hero({ introComplete = false }) {
               {personalData.shortName}.
             </span>
             <br />
-            an{' '}
+            a{' '}
             <span className="text-[1.05em] text-white/88 italic tracking-[-0.02em] [font-family:'Playfair_Display',serif] [font-weight:500] [font-style:italic] [-webkit-font-smoothing:antialiased] [-moz-osx-font-smoothing:grayscale]">
               {personalData.role}
             </span>
